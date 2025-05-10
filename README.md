@@ -30,6 +30,19 @@ Google Gemini API와 Pexels API, Sentence Transformers 기반으로 작동합니
 
 ---
 
+
+## 🔑 필요한 API 키
+
+### 1. 🔮 Google Gemini API
+- [https://aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey) 에서 API 키 생성
+- 생성 후 `.env` 파일에 `GEMINI_API_KEY=`에 붙여넣기
+
+### 2. 📷 Pexels API
+- [https://www.pexels.com/api/](https://www.pexels.com/api/) 에서 회원가입 후 API 키 발급
+- `.env` 파일에 `PEXELS_API_KEY=`에 붙여넣기
+
+---
+
 ## 🛠️ 설치 방법
 
 ```bash
