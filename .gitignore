@@ -1,0 +1,46 @@
+# ▶ Python Bytecode 및 캐시
+__pycache__/
+*.py[cod]
+*.so
+
+# ▶ 가상환경 (venv)
+venv/
+ENV/
+env/
+
+# ▶ 환경 변수 파일
+.env
+.env.*
+
+# ▶ Jupyter Notebook 체크포인트
+.ipynb_checkpoints/
+
+# ▶ macOS 시스템 파일
+.DS_Store
+
+# ▶ Windows 시스템 파일
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# ▶ VS Code 설정
+.vscode/
+
+# ▶ PyCharm 설정
+.idea/
+
+# ▶ 로그, 임시파일
+*.log
+*.sqlite3
+
+# ▶ 모델 파일 등 대용량
+*.pt
+*.pth
+*.ckpt
+*.h5
+*.onnx
+
+# ▶ 기타 임시 빌드 디렉토리
+build/
+dist/
+*.egg-info/
