@@ -1,3 +1,147 @@
+
+
+# 🧳 AI-based Travel Information Recommendation System
+
+When you enter a travel-related question,  
+this smart travel assistant automatically classifies the query, retrieves relevant information,  
+and provides a response with both text and images.  
+It is powered by Google Gemini API, Pexels API, and Sentence Transformers.
+
+---
+
+## 🚀 Key Features
+
+- ✅ **Automatic Question Classification**: Classifies into `contents`, `historical`, or `preparation` using Gemini API
+- 🔍 **Document Retrieval**: Uses Sentence Transformers embedding + FAISS for similarity search
+- 🧠 **Answer Generation**: Generates natural language responses based on retrieved documents using Gemini
+- 🗂 **Structured Message per Category**:
+  - `contents`: JSON output with Place, F&B, and Activity fields
+  - `preparation`: JSON output with Clothes and ETC fields
+  - `historical`: Timeline-based explanation + list of major historical events
+- 🖼️ **Auto Image Linking**: Fetches relevant images for each item using Pexels API (handled in FastAPI)
+- 💬 **Summary Generation**: Gemini generates a friendly 1-3 sentence summary (`summary`)
+- 🔒 **Secure API Key Management**: Managed using `.env` file
+
+---
+
+## 📄 Output Format by Category
+
+### 📍 `contents`
+```json
+{
+  "Place": [{ "name": "...", "information": "..." }, ...],
+  "F&B": [{ "name": "...", "information": "..." }, ...],
+  "Activity": [{ "name": "...", "information": "..." }, ...]
+}
+```
+
+### 📍 `preparation`
+```json
+{
+  "Clothes": [
+    {
+      "name": "Light Outerwear",
+      "information": "Perfect for spring and autumn trips with wide temperature ranges, it helps maintain body temperature during outdoor activities."
+    },
+    {
+      "name": "Comfortable Sneakers",
+      "information": "Reduces foot fatigue during long walks and supports safe travel."
+    }
+  ],
+  "ETC": [
+    {
+      "name": "Portable Battery",
+      "information": "Keeps your smartphone charged during long outings."
+    },
+    {
+      "name": "Multi Adapter",
+      "information": "A must-have for international travel to support various plug types."
+    }
+  ]
+}
+
+```
+
+### 📍 `historical`
+```json
+{
+  "Edo Period": {
+    "Period Description": "During the Edo period, Osaka developed into Japan’s largest commercial center and was called the 'Kitchen of the Nation.'",
+    "Major Events": [
+      {
+        "name": "Construction of Osaka Castle",
+        "description": "Built by Toyotomi Hideyoshi, this iconic structure remains a key tourist attraction in Osaka."
+      },
+      {
+        "name": "Commercial Boom",
+        "description": "Osaka prospered as a rice distribution hub and became the economic center of Japan."
+      }
+    ]
+  },
+  "Meiji Period": {
+    "Period Description": "After the Meiji Restoration, Osaka rapidly grew into an industrial and financial hub.",
+    "Major Events": [
+      {
+        "name": "Modern Industrialization",
+        "description": "Osaka transformed into a leading industrial city with factories and railroads."
+      },
+      {
+        "name": "Urban Planning Introduction",
+        "description": "With the implementation of modern urban infrastructure, Osaka became a central city of development."
+      }
+    ]
+  }
+}
+
+```
+
+## 📦 Technologies Used
+
+| Area | Technology |
+|------|------|
+| Embedding Model | `sentence-transformers/all-MiniLM-L6-v2` |
+| Conversational AI | Google `Gemini API` (generativeai) |
+| Image Search | `Pexels API` |
+| Vector Search | `FAISS` |
+| Environment Variable Management | `python-dotenv` |
+| Others | `requests`, `numpy`, `os` etc. |
+
+---
+
+
+## 🔑 Required API Keys
+
+### 1. 🔮 Google Gemini API
+- Generate your API key at: [https://aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey) 
+- Add it to your `.env` file as `GEMINI_API_KEY=your_api_key`
+
+### 2. 📷 Pexels API
+- Sign up and get your API key at: [https://www.pexels.com/api/](https://www.pexels.com/api/) 
+- Add it to your `.env` file as `PEXELS_API_KEY=your_api_key`
+
+---
+
+## 🛠️ Installation
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/YourUsername/YourRepositoryName.git
+cd YourRepositoryName
+
+# 2. Set up a virtual environment
+python -m venv venv
+venv\\Scripts\\activate        # Windows
+
+# 3. Install dependencies
+pip install -r requirements.txt
+
+# 4. Run the FastAPI server
+uvicorn api:app --reload
+```
+
+
+---
+
 # 🧳 AI 기반 여행 정보 추천 시스템
 
 여행 관련 질문을 입력하면,  
