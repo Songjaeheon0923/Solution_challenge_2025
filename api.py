@@ -5,15 +5,15 @@ from scrape_picture import get_image_for_input
 
 app = FastAPI()
 
-# ✅ 요청 스키마
+# ✅ Request schema
 class QueryRequest(BaseModel):
     question: str
 
-# ✅ 응답 스키마
+# ✅ Response schema
 class QueryResponse(BaseModel):
     response: dict
 
-# ✅ message 내부 항목에 이미지 URL 삽입
+# ✅ Add image URLs to message data
 def enrich_message_with_images(message: dict, category: str) -> dict:
     if category == "contents":
         for section in ["Place", "F&B", "Activity"]:
@@ -29,19 +29,17 @@ def enrich_message_with_images(message: dict, category: str) -> dict:
 
     return message
 
-# ✅ 메인 API 라우터
+# ✅ Main endpoint
 @app.post("/ask", response_model=QueryResponse)
 def ask_question(request: QueryRequest):
     question = request.question
     try:
-        # 핵심 응답 생성
         core = handle_full_response(question)
         category = core["category"]
 
-        # 이미지 처리 분기
         if category in ["contents", "preparation"]:
             core["message"] = enrich_message_with_images(core["message"], category)
-            image_url = None  # 대표 이미지 없음
+            image_url = None
         elif category == "historical":
             image_url = get_image_for_input(question)
         else:
@@ -57,7 +55,7 @@ def ask_question(request: QueryRequest):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-# ✅ 루트 확인용
+# ✅ Root
 @app.get("/")
 def root():
-    return {"message": "여행 도우미 API입니다. POST /ask로 질문을 보내보세요."}
+    return {"message": "Welcome to the Travel Assistant API. Send a POST request to /ask with your question."}
